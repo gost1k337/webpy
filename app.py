@@ -1,19 +1,6 @@
-from api import WebAPI
+from webpy.api import WebAPI
+from userRouter import user_router
 
-app = WebAPI()
+app = WebAPI(templates_dir='templates')
 
-
-@app.route('/home')
-def home(request, response):
-    response.text = 'Hello world home page!'
-
-
-@app.route('/about')
-def about(request, response):
-    response.text = 'Hello world from about page...'
-
-
-@app.route('/hello/{person_name}')
-def say_hello(request, response, person_name):
-    print(person_name)
-    response.text = f'hello, {person_name}'
+app.register_router('/blog', user_router)
